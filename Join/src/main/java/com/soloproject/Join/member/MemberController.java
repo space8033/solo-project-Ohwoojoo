@@ -1,7 +1,6 @@
 package com.soloproject.Join.member;
 
 import com.soloproject.Join.dto.MultiResponseDto;
-import com.soloproject.Join.dto.SingleResponseDto;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,12 +31,13 @@ public class MemberController {
                 new MultiResponseDto<>(mapper.membersToMemberResponses(members), pageMembers), HttpStatus.OK);
     }
 
-    @GetMapping("/{company-type}")
-    public ResponseEntity getMember(
-            @PathVariable("company-type") @Positive long companyType,@Positive long companyLocation) {
-        Member member = memberService.findMember(companyType, companyLocation);
+    @GetMapping("/{company-type}/{company-location}")
+    public ResponseEntity getFilteredMember(
+            @PathVariable("company-type") @Positive int companyType,
+            @PathVariable("company-location") @Positive int companyLocation) {
+        Page<Member> pageMembers = memberService.findFilteredMember(companyType, companyLocation);
+        List<Member> member = pageMembers.getContent();
         return new ResponseEntity<>(
-                new SingleResponseDto<>(mapper.memberToMemberResponse(member))
-                , HttpStatus.OK);
+                new MultiResponseDto<>(mapper.membersToMemberResponses(member), pageMembers), HttpStatus.OK);
     }
 }

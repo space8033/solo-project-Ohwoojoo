@@ -1,7 +1,6 @@
 package com.soloproject.Join.member;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 
 public class MemberDto {
@@ -13,7 +12,7 @@ public class MemberDto {
         private String password;
         private String sex;
         private String companyName;
-        private long companyType;
-        private long companyLocation;
+        private int companyType;
+        private int companyLocation;
     }
 }

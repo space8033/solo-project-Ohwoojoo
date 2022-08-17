@@ -29,9 +29,17 @@ public class Member {
     private String companyName;
 
     @Column(nullable = false)
-    private Long companyType;
+    private int companyType;
 
     @Column(nullable = false)
-    private Long companyLocation;
+    private int companyLocation;
 
+    public Member(String name, String password, String sex, String companyName, int companyType, int companyLocation){
+        this.name = name;
+        this.password = password;
+        this.sex = sex;
+        this.companyName = companyName;
+        this.companyType = companyType;
+        this.companyLocation = companyLocation;
+    }
 }
